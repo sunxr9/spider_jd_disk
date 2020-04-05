@@ -14,6 +14,8 @@ BOT_NAME = 'disk_price'
 SPIDER_MODULES = ['disk_price.spiders']
 NEWSPIDER_MODULE = 'disk_price.spiders'
 
+SPLASH_URL = 'http://127.0.0.1:8050'
+
 USER_AGENT = [
     'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36 OPR/26.0.1656.60',
     'Opera/8.0 (Windows NT 5.1; U; en)',
@@ -76,6 +78,7 @@ COOKIES_ENABLED = True
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 SPIDER_MIDDLEWARES = {
     'disk_price.middlewares.DiskPriceSpiderMiddleware': 543,
+    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
 }
 
 # Enable or disable downloader CutomMiddleware
@@ -85,6 +88,10 @@ DOWNLOADER_MIDDLEWARES = {
     # 'disk_price.middlewares.DiskPriceDownloaderMiddleware': 543,
     'disk_price.CutomMiddleware.useragent.UserAgentMiddleware': 544,
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    'scrapy_splash.SplashCookiesMiddleware': 723,
+    'scrapy_splash.SplashMiddleware': 725,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+
 }
 
 # Enable or disable extensions
@@ -119,7 +126,8 @@ DOWNLOADER_MIDDLEWARES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-
+DUPEFILTER_CLASS ='scrapy_splash.SplashAwareDupeFilter'
+HTTPCACHE_STORAGE ='scrapy_splash.SplashAwareFSCacheStorage'
 PROXIES = [
 'https://125.110.88.233:9000',
 'https://182.34.37.137:9999',
