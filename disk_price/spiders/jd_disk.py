@@ -115,7 +115,7 @@ class JdDiskSpider(scrapy.Spider):
         product_id = response.meta['product_id']
         if product_id in self.complete_product_id:
             return
-        
+
         self.complete_product_id.add(product_id)
 
         shop_link = response.xpath('//*[@id="crumb-wrap"]/div/div[2]/div[2]/div[1]/div/a')
