@@ -18,4 +18,3 @@ class UserAgentMiddleware(object):
     def process_request(self, request, spider):
 
         request.headers['User-Agent'] = random.choice(self.user_agent)
-        return None

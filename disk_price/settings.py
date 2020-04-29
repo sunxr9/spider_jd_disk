@@ -14,7 +14,7 @@ BOT_NAME = 'disk_price'
 SPIDER_MODULES = ['disk_price.spiders']
 NEWSPIDER_MODULE = 'disk_price.spiders'
 
-SPLASH_URL = 'http://127.0.0.1:8050'
+SPLASH_URL = 'http://localhost:8050'
 
 USER_AGENT = [
     'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36 OPR/26.0.1656.60',
@@ -61,7 +61,7 @@ DOWNLOAD_DELAY = 3
 
 
 # Disable cookies (enabled by default)
-COOKIES_ENABLED = True
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 # TELNETCONSOLE_ENABLED = True
@@ -77,15 +77,15 @@ COOKIES_ENABLED = True
 # Enable or disable spider CutomMiddleware
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 SPIDER_MIDDLEWARES = {
-    'disk_price.middlewares.DiskPriceSpiderMiddleware': 543,
+    # 'disk_price.middlewares.DiskPriceSpiderMiddleware': 543,
     'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
 }
 
 # Enable or disable downloader CutomMiddleware
 # # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    # 'disk_price.CutomMiddleware.proxy_middleware.ProxyMiddleware': 543,
-    # 'disk_price.middlewares.DiskPriceDownloaderMiddleware': 543,
+    'disk_price.CutomMiddleware.proxy_middleware.ProxyMiddleware': 539,
+    'disk_price.middlewares.DiskPriceDownloaderMiddleware': 543,
     'disk_price.CutomMiddleware.useragent.UserAgentMiddleware': 544,
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
     'scrapy_splash.SplashCookiesMiddleware': 723,
@@ -102,9 +102,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'disk_price.pipelines.DiskPricePipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'disk_price.pipelines.DiskPricePipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -126,7 +126,10 @@ DOWNLOADER_MIDDLEWARES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-DUPEFILTER_CLASS ='scrapy_splash.SplashAwareDupeFilter'
+# FEED_EXPORT_ENCODING = 'GB2312'
+
+CRAWLERA_DOWNLOAD_TIMEOUT = 60
+DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
 HTTPCACHE_STORAGE ='scrapy_splash.SplashAwareFSCacheStorage'
 PROXIES = [
 'https://125.110.88.233:9000',
